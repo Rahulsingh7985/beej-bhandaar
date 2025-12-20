@@ -6,7 +6,6 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-console.log("CLOUDINARY KEY =>", process.env.CLOUDINARY_API_KEY)
 
 export const uploadOnCloudinary = (buffer, folder = "posts") => {
   return new Promise((resolve, reject) => {
