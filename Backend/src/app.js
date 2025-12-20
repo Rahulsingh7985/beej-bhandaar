@@ -1,31 +1,41 @@
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
-import express from "express"
-import cors from "cors"
-import cookieParser from "cookie-parser"
+// Load environment variables
+dotenv.config();
 
-const app = express()
+const app = express();
 
+// CORS setup using env variable
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN, // <-- use env variable here
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-app.use(express.json({limit: "16kb"}))
-app.use(express.urlencoded({extended: true, limit: "16kb"}))
-app.use(express.static("public"))
-app.use(cookieParser())
+// Body parsing
+app.use(express.json({ limit: "16kb" }));
+app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.static("public"));
+app.use(cookieParser());
 
+// Routes import
+import userRouter from "./routes/user.routes.js";
+import postRouter from "./routes/post.routes.js";
 
-//routes import
- import userRouter from './routes/user.routes.js'
- import postRouter from './routes/post.routes.js'
+// Routes declaration
+app.use("/api/v2/users", userRouter);
+app.use("/api/v2/posts", postRouter);
 
-//routes declaration
-app.use("/api/v2/users", userRouter)
-app.use("/api/v2/posts", postRouter)
+// Default route for testing
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
-export { app }
+// ✅ Default export for Vercel
+export default app;
