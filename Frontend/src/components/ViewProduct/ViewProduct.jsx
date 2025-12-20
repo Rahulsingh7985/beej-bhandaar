@@ -12,7 +12,7 @@ export default function ViewProduct() {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v2/posts/${id}`
+          `${import.meta.env.VITE_API_URL}/api/v2/posts/${id}`
         );
         setProduct(res.data.data);
       } catch (err) {

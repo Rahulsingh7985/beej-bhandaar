@@ -47,7 +47,7 @@ export default function AdminPost() {
       const token = localStorage.getItem("accessToken");
 
       const res = await axios.post(
-        "http://localhost:5000/api/v2/posts/create",
+        `${import.meta.env.VITE_API_URL}/api/v2/posts/create`,
         formData,
         {
           withCredentials: true,

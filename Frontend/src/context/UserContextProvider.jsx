@@ -30,7 +30,7 @@ const UserContextProvider = ({ children }) => {
     const getCurrentUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v2/users/me"
+          `${import.meta.env.VITE_API_URL}/api/v2/users/me`
         );
         setUser(res.data.data);
       } catch (error) {
@@ -45,7 +45,7 @@ const UserContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/v2/users/logout");
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/v2/users/logout`);
     } catch (error) {
       console.log("Logout error", error);
     } finally {

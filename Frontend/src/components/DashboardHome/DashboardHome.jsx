@@ -22,7 +22,7 @@ export default function CategoryPosts() {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/v2/posts");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v2/posts`);
       setPosts(res.data?.data || []);
     } catch (error) {
       console.error("Failed to fetch posts", error);
