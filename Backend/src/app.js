@@ -8,10 +8,14 @@ dotenv.config();
 
 const app = express();
 
+// Set allowed origin for Vercel deployment
+const allowedOrigin =
+  process.env.CORS_ORIGIN || "https://beej-bhandaar-hazel.vercel.app";
+
 // CORS setup using env variable
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN, // <-- use env variable here
+    origin: allowedOrigin,
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -36,6 +40,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 // Default route for testing
 app.get("/", (req, res) => {
   res.send("Backend is running!");
