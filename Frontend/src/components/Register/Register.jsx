@@ -1,23 +1,30 @@
-
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import UserContext from "../../context/UserContext";
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [address, setAddress] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
 
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate(); // ✅ added
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password || !address) {
       alert("All fields are required");
+      return;
+    }
+
+    // ✅ Gmail validation (only original gmail)
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!gmailRegex.test(email)) {
+      alert("Only valid Gmail address is allowed");
       return;
     }
 
@@ -28,18 +35,20 @@ const Register = () => {
           fullName: name,
           email,
           password,
-          address
+          address,
         },
-        { withCredentials: true } // cookies ke liye
+        { withCredentials: true }
       );
 
       console.log(res.data);
 
-      setUser(res.data.data); // Context me save user
+      // ✅ Save user in context
+      setUser(res.data.data);
+
       alert("User Registered Successfully");
 
-      // Optional: redirect to login or home page
-      // navigate("/login");
+      // ✅ Redirect to Dashboard
+      navigate("/DashboardHome"); // change route if needed
 
     } catch (error) {
       console.log(error.response?.data);
@@ -62,7 +71,6 @@ const Register = () => {
           </Link>
         </p>
 
-        {/* Google Login */}
         <button
           onClick={handleGoogleLogin}
           className="w-full flex items-center justify-center gap-3 border border-gray-300 py-3 rounded-md hover:bg-gray-50 transition mb-5"
@@ -83,33 +91,33 @@ const Register = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name"
-            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5]"
           />
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Address"
-            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5]"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Gmail address only"
+            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5]"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-4 py-3 rounded-md bg-[#f1f0f5]"
           />
 
           <button
             type="submit"
-            className="w-full py-3 bg-orange-600 hover:bg-orange-700 rounded-md font-semibold text-white transition"
+            className="w-full py-3 bg-orange-600 hover:bg-orange-700 rounded-md font-semibold text-white"
           >
             Create Account
           </button>
