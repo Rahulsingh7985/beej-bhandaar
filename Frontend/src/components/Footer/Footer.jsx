@@ -38,7 +38,7 @@ export default function Footer() {
 
                         {/* Email */}
                         <a
-                            href="mailto:suneelpatel@gmail.com"
+                            href="mailto:suneelpatel409@gmail.com"
                             className="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition duration-300 transform hover:scale-110 shadow-md"
                             title="Email us"
                         >
