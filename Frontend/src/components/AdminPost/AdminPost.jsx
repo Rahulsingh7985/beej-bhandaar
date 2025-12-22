@@ -139,6 +139,7 @@ export default function AdminPost() {
               </option>
               <option value="seed">🌾 बीज (Seed)</option>
               <option value="pesticide">🧪 कीटनाशक (Pesticide)</option>
+              <option value="herbicide">🧪 खरपतवार  (herbicide)</option>
               <option value="fertilizer">🌱 उर्वरक (Fertilizer)</option>
               <option value="equipment">🔧 उपकरण (Equipment)</option>
             </select>
