@@ -351,7 +351,7 @@ export default function ViewProduct() {
               {/* Category Input */}
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                  Category
+                  Category : seed | pesticide | fertilizer | equipment | herbicide
                 </label>
                 <input
                   type="text"
