@@ -77,6 +77,21 @@ export default function Header() {
                   </NavLink>
                 </li>
               )}
+               {user?.role === "admin" && (
+                <li className="w-full lg:w-auto border-b lg:border-b-0 border-gray-100">
+                  <NavLink
+                    to="/admin/dashboard"
+                    onClick={closeMenu}
+                    className={({ isActive }) =>
+                      `block py-3 px-4 sm:px-3 ${
+                        isActive ? "text-orange-700 bg-orange-50 lg:bg-transparent" : "text-gray-700"
+                      } hover:text-orange-700 hover:bg-orange-50 lg:hover:bg-transparent transition-colors`
+                    }
+                  >
+                    Admin Dashboard
+                  </NavLink>
+                </li>
+              )}
 
               {/* Mobile Auth Section */}
               <li className="lg:hidden w-full border-t border-gray-200 mt-2 pt-2">
