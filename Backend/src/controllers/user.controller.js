@@ -216,6 +216,27 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, req.user, "User fetched successfully"));
 });
 
+// ----------------------------------------
+// 🟢 Get All Users (ADMIN ONLY)
+// ----------------------------------------
+const getAllUsers = asyncHandler(async (req, res) => {
+  // Check if user is admin
+  if (req.user.role !== "admin") {
+    throw new ApiError(403, "Only admins can access this resource");
+  }
+
+  // Fetch all users (excluding passwords and refresh tokens)
+  const users = await User.find().select("-password -refreshToken");
+
+  if (!users) {
+    throw new ApiError(500, "Failed to fetch users");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, users, "All users fetched successfully"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -223,4 +244,5 @@ export {
   changeCurrentPassword,
   updateAccountDetails,
   getCurrentUser,
+  getAllUsers,
 };
