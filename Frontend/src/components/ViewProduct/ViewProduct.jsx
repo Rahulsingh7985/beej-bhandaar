@@ -244,14 +244,14 @@ export default function ViewProduct() {
                 {/* Contact Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <a
-                    href="tel:7985265078"
+                    href="tel:9589259036"
                     className="flex-1 px-6 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-center transition duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg text-sm sm:text-base"
                   >
                     📞 Call Now
                   </a>
 
                   <a
-                    href="https://wa.me/7985265078"
+                    href="https://wa.me/9589259036"
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 px-6 py-3 sm:py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl text-center transition duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg text-sm sm:text-base"
